@@ -1,0 +1,7 @@
+{
+  "name": "Cê Vai?",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
