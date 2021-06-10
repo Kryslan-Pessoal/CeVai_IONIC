@@ -1,0 +1,47 @@
+<ion-header></ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <ion-grid style="margin-top: 20%; text-align: center;">
+    <!-- Logo (Imagem) -->
+    <ion-row style=" padding-bottom: 100px;">
+      <ion-col class="center-horizontal">
+        <ion-img style="width:100px; height:100px;" src="assets/icon/logo_app.png"></ion-img>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" style="margin-right: 10%; margin-left: 10%; --background: #EA4335;" (click)="entrarComGoogle()">
+          <ion-icon slot="start" name="logo-google"></ion-icon>
+            ENTRAR COM GOOGLE
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" style="margin-right: 10%; margin-left: 10%; --background: #3B5998;" (click)="entrarComGoogle()">
+          <ion-icon slot="start" name="logo-facebook"></ion-icon>
+            ENTRAR COM FACEBOOK
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" style="margin-right: 10%; margin-left: 10%;" (click)="entrarComGoogle()">
+          <ion-icon slot="start" name="person"></ion-icon>
+            ENTRAR COM SUA CONTA
+        </ion-button>
+      </ion-col>
+    </ion-row>
+
+    <p style="color: #5E5E5E;">Esqueceu a Senha?</p>
+
+  </ion-grid>
+
+  
+   <!-- Texto fixado na parte de baixo -->
+   <ion-grid class="fix-bottom">
+    <p style="color: #5E5E5E;">Não tem uma conta Cê Vai? <b>Cadastre-se</b></p>
+  </ion-grid>
+</ion-content>
