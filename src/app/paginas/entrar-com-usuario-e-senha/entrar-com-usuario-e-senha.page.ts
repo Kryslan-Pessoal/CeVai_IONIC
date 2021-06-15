@@ -16,13 +16,16 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 	//#region Start
 	constructor(){}
 
-	ngOnInit(){}
+	ngOnInit(){
+		this.configuraStatusBar();
+	}
+	
 	//TODO: debug
-	  ngAfterViewInit() {
-	    setTimeout(() => {
-	      // console.clear();
-	    }, 1000);
-	  }
+	ngAfterViewInit() {
+	setTimeout(() => {
+		// console.clear();
+	}, 1000);
+	}
 	//#endregion Start
 
 	//#region Listerners

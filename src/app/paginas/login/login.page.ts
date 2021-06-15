@@ -34,6 +34,9 @@ export class HomePage {
   async entrarComFacebook(){
     //TODO: login com facebook
   }
+  entrarComUsuarioESenhaClick(){
+    this.navController.navigateForward(["entrar-com-usuario-e-senha"]);
+  }
   //#endregion Buttons
 
    //#region Utilitários
