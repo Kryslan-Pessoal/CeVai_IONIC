@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { StatusBar } from '@capacitor/status-bar';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
+import Log from 'src/app/utilitarios/Log';
 
 @Component({
-  selector: 'app-entrar-com-usuario-e-senha',
-  templateUrl: './entrar-com-usuario-e-senha.page.html',
-  styleUrls: ['./entrar-com-usuario-e-senha.page.scss'],
+  selector: 'app-esqueceu-a-senha',
+  templateUrl: './esqueceu-a-senha.page.html',
+  styleUrls: ['./esqueceu-a-senha.page.scss'],
 })
-export class EntrarComUsuarioESenhaPage implements OnInit {
+export class EsqueceuASenhaPage implements OnInit {
 
-	//#region Globais
-	email: string;
+  //#region Globais
+	email: string = "";
 
 	//#endregion Globais
 
@@ -36,8 +37,9 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 
 	//#region Botões
 	recuperarSenhaClick(){
-		if(this.email != ""){
-			this.toast("E-mail Vazio!")
+    Log.d("this.email", this.email);
+		if(this.email == ""){
+			this.toast("E-mail não pode estar vazio!")
 		}else{
 			this.exibeMensagem("E-mail enviado!", "Um e-mail com informações da recuperação de senha foi enviado, verifique seu Email!");
 		}
@@ -69,9 +71,10 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 	async toast(mensagem: string) {
 		const toast = await this.toastController.create({
 			message: mensagem,
-			duration: 1000
+			duration: 2000
 		});
 		toast.present();
 	}
 	//#endregion Utilitários
+
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { StatusBar } from '@capacitor/status-bar';
 import { MenuController, NavController } from '@ionic/angular';
+import Log from 'src/app/utilitarios/Log';
 
 @Component({
   selector: 'app-home',
@@ -28,14 +29,17 @@ export class HomePage {
   //#endregion Start
 
   //#region Buttons
-  async entrarComGoogle(){
+  async entrarComGoogle_click(){
     //TODO: login com google
   }
-  async entrarComFacebook(){
+  async entrarComFacebook_click(){
     //TODO: login com facebook
   }
-  entrarComUsuarioESenhaClick(){
+  entrarComSuaConta_click(){
     this.navController.navigateForward(["entrar-com-usuario-e-senha"]);
+  }
+  esqueceuASenha_click(){
+    this.navController.navigateForward(["esqueceu-a-senha"]);
   }
   //#endregion Buttons
 

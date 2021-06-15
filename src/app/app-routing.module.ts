@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'entrar-com-usuario-e-senha',
     loadChildren: () => import('./paginas/entrar-com-usuario-e-senha/entrar-com-usuario-e-senha.module').then( m => m.EntrarComUsuarioESenhaPageModule)
   },
+  {
+    path: 'esqueceu-a-senha',
+    loadChildren: () => import('./paginas/esqueceu-a-senha/esqueceu-a-senha.module').then( m => m.EsqueceuASenhaPageModule)
+  },
 ];
 
 @NgModule({
