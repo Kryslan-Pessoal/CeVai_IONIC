@@ -36,16 +36,14 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" style="margin-right: 10%; margin-left: 10%;">
-          <ion-icon slot="start" name="person" (click)="entrarComSuaConta_click()"></ion-icon>
+        <ion-button expand="block" style="margin-right: 10%; margin-left: 10%;" (click)="entrarComSuaConta_click()">
+          <ion-icon slot="start" name="person"></ion-icon>
             ENTRAR COM SUA CONTA
         </ion-button>
       </ion-col>
     </ion-row>
 
-    <div (click)="esqueceuASenha_click()">
-      <p style="color: #5E5E5E;" >Esqueceu a Senha?</p>
-    </div>
+    <p style="color: #5E5E5E;" (click)="esqueceuASenha_click()">Esqueceu a Senha?</p>
   </ion-grid>
 
   

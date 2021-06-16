@@ -4,7 +4,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
 
-    <ion-title>Login</ion-title>
+    <ion-title>Entrar com Conta Cê Vai?</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -18,26 +18,31 @@
           <ion-img style="width:100px; height:100px;" src="assets/icon/logo_app.png"></ion-img>
         </ion-col>
       </ion-row>
-
-      <!-- Título Recuperar Senha -->
+      <!-- Título Entrar com Usuário e Senha -->
       <ion-row class="center-horizontal">
-        <h1 style="font-weight: 300;">Recuperar Senha</h1>
+        <h1 style="font-weight: 300;">Entrar com Usuário e Senha</h1>
       </ion-row>
     </ion-grid>
-
-    <!-- Input para anotar E-mail -->
+    <!-- Input E-mail -->
     <ion-item >
       <ion-label position="floating">Email:</ion-label>
-      <ion-input style="margin-top: 5px;" type="email" (value)="email"></ion-input>
+      <ion-input style="margin-top: 5px;" type="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+    <!-- Input Senha -->
+    <ion-item style="margin-top: 15px;">
+      <ion-label position="floating">Senha:</ion-label>
+      <ion-input style="margin-top: 5px;" type="password" [(ngModel)]="senha"></ion-input>
     </ion-item>
   </ion-grid>
 
-  <!-- Botão recuperar Senha -->
+  <p style="color: #5E5E5E; text-align: center;" (click)="esqueceuASenha_click()">Esqueceu a Senha?</p>
+
+  <!-- Botão Login -->
   <ion-grid class="fixBottom">
     <ion-row>
       <ion-col>
-        <ion-button expand="block" style="margin-right: 10%; margin-left: 10%;" (click)="recuperarSenhaClick()">
-          RECUPERAR SENHA
+        <ion-button expand="block" style="margin-right: 10%; margin-left: 10%;" (click)="login_click()">
+          LOGIN
         </ion-button>
       </ion-col>
     </ion-row>
