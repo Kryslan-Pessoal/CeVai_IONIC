@@ -9,7 +9,7 @@
           {{nomeDoUsuario}}
         </h2>
         <h4 class="h4" style="padding-left: 13px;">
-          {{tipoDeUsuario}}
+          {{tipoDeUsuarioAtual}}
         </h4>
        
         <!-- LINHA 1 -->
@@ -25,7 +25,7 @@
 
         <!-- LINHA 2 -->
         <!-- Motorista (Aluno e Responsável) -->
-        <ion-menu-toggle autoHide="false">
+        <ion-menu-toggle autoHide="false" *ngIf="tipoDeUsuarioAtual == ALUNO || tipoDeUsuarioAtual == RESPONSAVEL">
           <ion-item (click)="motorista_click()" routerLinkActive="active" routerDirection="root" detail="false">
             <ion-icon slot="start" name="person"></ion-icon>
             <ion-label>
@@ -34,7 +34,7 @@
           </ion-item>
         </ion-menu-toggle>
         <!-- Alunos (Motorista) -->
-        <ion-menu-toggle autoHide="false">
+        <ion-menu-toggle autoHide="false" *ngIf="tipoDeUsuarioAtual == MOTORISTA">
           <ion-item (click)="aluno_click()" routerLinkActive="selected" routerDirection="root" detail="false">
             <ion-icon slot="start" name="person"></ion-icon>
             <ion-label>
@@ -45,7 +45,7 @@
 
         <!-- LINHA 3 -->
         <!-- Responsável (Aluno) -->
-        <ion-menu-toggle autoHide="false">
+        <ion-menu-toggle autoHide="false" *ngIf="tipoDeUsuarioAtual == ALUNO">
           <ion-item (click)="responsavel_click()" routerDirection="root" detail="false" >
             <ion-icon slot="start" name="people"></ion-icon>
             <ion-label>
@@ -54,7 +54,7 @@
           </ion-item>
         </ion-menu-toggle>
         <!-- Dependentes (Motorista) -->
-        <ion-menu-toggle autoHide="false">
+        <ion-menu-toggle autoHide="false" *ngIf="tipoDeUsuarioAtual == MOTORISTA">
           <ion-item (click)="dependentes_click()" routerDirection="root" detail="false" >
             <ion-icon slot="start" name="people"></ion-icon>
             <ion-label>
@@ -63,11 +63,11 @@
           </ion-item>
         </ion-menu-toggle>
         <!-- Dependente (Responsável) -->
-        <ion-menu-toggle autoHide="false">
+        <ion-menu-toggle autoHide="false" *ngIf="tipoDeUsuarioAtual == RESPONSAVEL">
           <ion-item (click)="dependente_click()" routerDirection="root" detail="false" >
             <ion-icon slot="start" name="people"></ion-icon>
             <ion-label>
-              Responsável
+              Dependente
             </ion-label>
           </ion-item>
         </ion-menu-toggle>
@@ -76,9 +76,9 @@
         <!-- Configurações -->
         <ion-menu-toggle autoHide="false">
           <ion-item (click)="configuracoes_click()" routerDirection="root" detail="false" >
-            <ion-icon slot="start" name="people"></ion-icon>
+            <ion-icon slot="start" name="cog-outline"></ion-icon>
             <ion-label>
-              Responsável
+              Configurações
             </ion-label>
           </ion-item>
         </ion-menu-toggle>

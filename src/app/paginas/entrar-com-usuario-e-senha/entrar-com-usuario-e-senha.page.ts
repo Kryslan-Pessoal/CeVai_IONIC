@@ -4,7 +4,6 @@ import { StatusBar } from '@capacitor/status-bar';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { AppComponent } from 'src/app/app.component';
-import { Aluno, Motorista, Responsavel, Usuario } from 'src/app/entidades/Usuario';
 import { StorageService } from 'src/app/storage/storage.service';
 import { TiposDeUsuario } from 'src/app/utilitarios/Enum';
 import Log from 'src/app/utilitarios/Log';

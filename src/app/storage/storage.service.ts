@@ -13,44 +13,50 @@ import Log from '../utilitarios/Log';
 export class StorageService {
 
   //#region Keys dos storages
-  ALUNOS = "Alunos";
-  MOTORISTA = "Motorista";
-  RESPONSAVEL = "Responsavel";
+  ALUNOS_KEY = "Alunos";
+  MOTORISTA_KEY = "Motorista";
+  RESPONSAVEL_KEY = "Responsavel";
 
-  TIPO_DE_USUARIO_ATUAL = "tipoDeUsuárioAtual";
+  TIPO_DE_USUARIO_ATUAL_KEY = "tipoDeUsuárioAtual";
 
-  DADOS_DO_USUARIO_ATUAL = "dadosDoUsuárioAtual";
+  DADOS_DO_USUARIO_ATUAL_KEY = "dadosDoUsuárioAtual";
   //#endregion Keys dos storages
 
   /** Monitora o tipo de usuário atual */
-  usuarioAtual = TiposDeUsuario.ALUNO;
+  public usuarioAtual = TiposDeUsuario.ALUNO;
 
   constructor(
     private storage: Storage,
   ){}
 
+  /** Utilize o {@link Enum.TiposDeUsuario} */
   setTipoDeUsuarioAtual(tipoDeUsuario: string){
-    return this.storage.set(this.TIPO_DE_USUARIO_ATUAL, tipoDeUsuario);
+    this.usuarioAtual = tipoDeUsuario;
+    return this.storage.set(this.TIPO_DE_USUARIO_ATUAL_KEY, tipoDeUsuario);
   }
+  /** Retorna como {@link Enum.TiposDeUsuario}
+  *  TiposDeUsuario.ALUNO
+  *  TiposDeUsuario.MOTORISTA
+  *  TiposDeUsuario.RESPONSAVEL */
   getTipoDeUsuarioAtual(){
-    return this.storage.get(this.TIPO_DE_USUARIO_ATUAL);
+    return this.storage.get(this.TIPO_DE_USUARIO_ATUAL_KEY);
   }
 
   setUsuarioAtual(usuarioAtual){
-    return this.storage.set(this.DADOS_DO_USUARIO_ATUAL, usuarioAtual);
+    return this.storage.set(this.DADOS_DO_USUARIO_ATUAL_KEY, usuarioAtual);
   }
   getUsuarioAtual(){
-    return this.storage.get(this.DADOS_DO_USUARIO_ATUAL);
+    return this.storage.get(this.DADOS_DO_USUARIO_ATUAL_KEY);
   }
 
   getAluno(): Promise<Aluno>{
-    return this.storage.get(this.ALUNOS);
+    return this.storage.get(this.ALUNOS_KEY);
   }
   getResponsavel(): Promise<Responsavel>{
-    return this.storage.get(this.RESPONSAVEL);
+    return this.storage.get(this.RESPONSAVEL_KEY);
   }
   getMotorista(): Promise<Motorista>{
-    return this.storage.get(this.MOTORISTA);
+    return this.storage.get(this.MOTORISTA_KEY);
   }
 
   /** Configura Banco pela primeira vez ao abrir o App */
@@ -99,7 +105,7 @@ export class StorageService {
     listaDeAluno.aluno.push(aluno1);
     listaDeAluno.aluno.push(aluno2);
     // Log.i("Alunos Criados");
-    return this.storage.set(this.ALUNOS, listaDeAluno.aluno);
+    return this.storage.set(this.ALUNOS_KEY, listaDeAluno.aluno);
   }
   inserirMotorista(){
     let motorista: Motorista = new Motorista();
@@ -113,7 +119,7 @@ export class StorageService {
     motorista.idAlunos.push(1);
     motorista.idResponsavel = 3;
     // Log.i("Motorista Criado");
-    return this.storage.set(this.MOTORISTA, motorista);
+    return this.storage.set(this.MOTORISTA_KEY, motorista);
   }
   inserirResponsavel(){
     let responsavel: Responsavel = new Responsavel();
@@ -126,7 +132,7 @@ export class StorageService {
     responsavel.idAluno = 0;
     responsavel.idMotorista = 1;
     // Log.i("Responsável Criado");
-    return this.storage.set(this.RESPONSAVEL, responsavel);
+    return this.storage.set(this.RESPONSAVEL_KEY, responsavel);
   }
   //#endregion Configura Banco
 }

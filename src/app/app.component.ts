@@ -3,6 +3,7 @@ import { AlertController, NavController } from '@ionic/angular';
 import { Subject } from 'rxjs';
 import { EntrarComUsuarioESenhaPage } from './paginas/entrar-com-usuario-e-senha/entrar-com-usuario-e-senha.page';
 import { StorageService } from './storage/storage.service';
+import { TiposDeUsuario } from './utilitarios/Enum';
 
 @Component({
   selector: 'app-root',
@@ -11,12 +12,18 @@ import { StorageService } from './storage/storage.service';
 })
 export class AppComponent {
 
-  tipoDeUsuario;
+  /** Monitora o tipo de usuário atual */
+  tipoDeUsuarioAtual;
+  /** Guarda o nome do usuário logado atualmente */
   nomeDoUsuario;
 
-  /** Usada para desativar o while que atualiza a hora quando sair desta página
-   * em {@link defineHoraAtual()} */
-   sePaginaAtiva: boolean = true;
+  /** Usada para desativar o while que atualiza a hora quando sair desta página em {@link defineHoraAtual()} */
+  sePaginaAtiva: boolean = true;
+
+  //Enums
+  ALUNO = TiposDeUsuario.ALUNO;
+  MOTORISTA = TiposDeUsuario.MOTORISTA;
+  RESPONSAVEL = TiposDeUsuario.RESPONSAVEL;
 
   constructor(
     private alertController : AlertController,
@@ -40,7 +47,7 @@ export class AppComponent {
       );
       this.storage.getTipoDeUsuarioAtual().then(
         tipoDeUsuarioAtual => {
-          this.tipoDeUsuario = tipoDeUsuarioAtual;
+          this.tipoDeUsuarioAtual = tipoDeUsuarioAtual;
         }
       );
       await new Promise(r => setTimeout(r, 1000));
