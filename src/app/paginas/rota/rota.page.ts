@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-rota',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RotaPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private navController: NavController,
+  ) { }
 
   ngOnInit() {
+  }
+
+  iniciarRota_fabClick(){
+    this.navController.navigateForward(['mapa']);
   }
 
 }

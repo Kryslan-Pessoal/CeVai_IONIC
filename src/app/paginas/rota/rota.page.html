@@ -1,9 +1,93 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>rota</ion-title>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Rota</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
+  <!-- Card Título -->
+  <ion-card class="card">
+    <ion-card-content>
+      <ion-grid>
+        <!-- Título -->
+        <ion-row>
+          <ion-col>
+            <h1 class="h1">
+              Manhã - Ida para Pitágoras
+            </h1>
+         </ion-col>
+        </ion-row>
+        <!-- Horário de Saída -->
+        <ion-row>
+          <ion-col>
+            Hora de saída normal: <b>8:00</b>
+          </ion-col>
+        </ion-row>
+        <!-- Tempo Estimado -->
+        <ion-row>
+          <ion-col>
+            Tempo estimado para chegada: <b>9:00</b>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Card Com Paradas -->
+  <ion-card class="card">
+    <ion-card-content>
+      <ion-grid style="margin-top: 10px; margin-right: 5%; margin-left: 5%;">
+
+        <!-- SEU LOCAL -->
+        <ion-grid style="margin-bottom: 5px;">
+          <ion-row>
+            <ion-col size="1">
+              <ion-img src="assets/img/simbolos/seu_local.png" style="max-width: 30px; padding-right: 5px;"></ion-img>
+            </ion-col>
+            <ion-col size="11" class="input">
+              Seu Local
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <!-- ALUNOS -->
+        <ion-grid style="margin-bottom: 5px;">
+          <ion-row>
+            <ion-col size="1">
+              <ion-img src="assets/img/simbolos/check.png" style="max-width: 30px; padding-right: 5px;"></ion-img>
+            </ion-col>
+            <ion-col size="11" class="input">
+              Kryslan - Timóteo Rua 35, nº 50
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+        <!-- FACULDADE -->
+        <ion-grid style="margin-bottom: 5px;">
+          <ion-row>
+            <ion-col size="1">
+              <ion-img src="assets/img/simbolos/faculdade.png" style="max-width: 30px; padding-right: 5px;"></ion-img>
+            </ion-col>
+            <ion-col size="11" class="input">
+              Única - Ipatinga
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
+
+<!-- FAB Iniciar Rota -->
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 15px; margin-right: 15px;">
+  <ion-fab-button (click)="iniciarRota_fabClick()">
+    <ion-icon name="play"></ion-icon>
+  </ion-fab-button>
+</ion-fab>

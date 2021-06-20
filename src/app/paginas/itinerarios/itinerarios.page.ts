@@ -9,12 +9,7 @@ import { MenuController, NavController } from '@ionic/angular';
 })
 export class ItinerariosPage implements OnInit {
 
- 	//#region Globais
 
-	//#endregion Globais
-
-
-	//#region Start
 	constructor(
 		private menu: MenuController,
 		private navController: NavController,
@@ -23,22 +18,16 @@ export class ItinerariosPage implements OnInit {
 		this.menu.enable(true);
 	}
 	ngOnInit(){}
-	//#endregion Start
 
-	//#region Botões
+	rota_cardClick(){
+		this.navController.navigateForward(['rota']);
+	}
+
 	fabAdicionarItinerario_click(){
 		this.navController.navigateForward(["cadastro-de-itinerario"]);
 	}
-	//#endregion Botõe
-
-	//#region Utilitários
 	configuraStatusBar(){
-
 	  StatusBar.setOverlaysWebView({ overlay: false });  //Deixa Toolbar visível
-
 	  StatusBar.setBackgroundColor({color:'#F57C00'});
-
 	}
-	//#endregion Utilitários
-
 }
