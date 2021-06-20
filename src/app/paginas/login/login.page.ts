@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { StatusBar } from '@capacitor/status-bar';
@@ -10,7 +10,7 @@ import Log from 'src/app/utilitarios/Log';
   templateUrl: 'login.page.html',
   styleUrls: ['login.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   //#region Start
   constructor(
@@ -20,7 +20,6 @@ export class HomePage {
   ) {}
 
   ngOnInit(){
-    
     this.configuraStatusBar();
 
     this.menu.enable(false);
