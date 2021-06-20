@@ -1,6 +1,6 @@
 {
-	"appId": "io.ionic.starter",
-	"appName": "Cê Vai?",
-	"webDir": "www",
-	"bundledWebRuntime": false
+  "appId": "io.ionic.starter",
+  "appName": "Cê Vai?",
+  "webDir": "www",
+  "bundledWebRuntime": false
 }

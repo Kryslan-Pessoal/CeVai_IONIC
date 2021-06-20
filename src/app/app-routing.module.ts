@@ -22,7 +22,8 @@ const routes: Routes = [
   {
     path: 'itinerarios',
     loadChildren: () => import('./paginas/itinerarios/itinerarios.module').then( m => m.ItinerariosPageModule)
-  },  {
+  },
+  {
     path: 'alunos',
     loadChildren: () => import('./paginas/alunos/alunos.module').then( m => m.AlunosPageModule)
   },
@@ -46,8 +47,6 @@ const routes: Routes = [
     path: 'contato',
     loadChildren: () => import('./paginas/contato/contato.module').then( m => m.ContatoPageModule)
   },
-
-
 ];
 
 @NgModule({
