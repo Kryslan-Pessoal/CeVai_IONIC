@@ -1,5 +1,5 @@
 export class TiposDeUsuario{
-    public static ALUNO = "aluno";
-    public static MOTORISTA = "motorista";
-    public static RESPONSAVEL = "responsavelPeloAluno";
+    public static ALUNO = "Aluno";
+    public static MOTORISTA = "Motorista";
+    public static RESPONSAVEL = "Responsável";
 }

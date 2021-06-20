@@ -12,15 +12,16 @@ import { StorageService } from './storage/storage.service';
 export class AppComponent {
 
   tipoDeUsuario;
-  //TODO: Puxar automático
-
   nomeDoUsuario;
-  //TODO: Puxar automático
+
+  /** Usada para desativar o while que atualiza a hora quando sair desta página
+   * em {@link defineHoraAtual()} */
+   sePaginaAtiva: boolean = true;
 
   constructor(
     private alertController : AlertController,
     private navController : NavController,
-    private storageService: StorageService,
+    private storage: StorageService,
   ){
 
     // this.storageService.inicializarBanco();
@@ -29,9 +30,24 @@ export class AppComponent {
 
   }
 
-
-  configuraUsuarioAtual(){
-    this.nomeDoUsuario = "Kryslan";
+  async configuraUsuarioAtual(){
+    this.sePaginaAtiva = true;
+    while(this.sePaginaAtiva){
+      this.storage.getUsuarioAtual().then(
+        usuario => {
+          this.nomeDoUsuario = usuario.nome;
+        }
+      );
+      this.storage.getTipoDeUsuarioAtual().then(
+        tipoDeUsuarioAtual => {
+          this.tipoDeUsuario = tipoDeUsuarioAtual;
+        }
+      );
+      await new Promise(r => setTimeout(r, 1000));
+    }
+  }
+  ionViewDidLeave(){
+    this.sePaginaAtiva = false;
   }
 
   //#region Botões

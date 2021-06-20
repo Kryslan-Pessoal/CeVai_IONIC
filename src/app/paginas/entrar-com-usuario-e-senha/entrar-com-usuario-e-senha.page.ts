@@ -27,7 +27,6 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 		private alertController: AlertController,
 		private navController: NavController,
 		private toastController: ToastController,
-		private router: Router,
 		private storage: StorageService,
 		private appComponent: AppComponent,
 	){}
@@ -43,13 +42,6 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
   public getTipoDeUsuario(): Subject<any> {
     return this.subject;
   }
-
-	//TODO: debug
-	ngAfterViewInit() {
-		setTimeout(() => {
-			// console.clear();
-		}, 1000);
-	}
 	//#endregion Start
 
 	//#region Botões
@@ -64,18 +56,30 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 		// }
 
 		this.navController.navigateRoot(['itinerarios']);
-		//Caso senha e email válidos
-		this.logaUsuario().then(
-			result => {
-				this.navController.navigateForward(['itinerarios'], { 
-					state: { 
-					  informacoesDoUsuario: result[0],
-					  tipoDeUsuario: result[1]
-					}
-				});
 
-				// AppComponent.tipoDeUsuario = result[1];
-				// AppComponent.nomeDoUsuario = result[0].nome;
+		//Caso senha e email válidos
+		this.defineQualUsuarioLogou().then(
+			//Seta usuário no banco de dados
+			result => {
+				this.storage.setTipoDeUsuarioAtual(result[1]).then(
+					result2 => {
+						Log.i("Tipo de usuário atual definido: " + result2);
+					},
+					erro => {
+						Log.e("Erro ao setar usuário atual: " + erro);
+					}
+				);
+
+				this.storage.setUsuarioAtual(result[0]).then(
+					result2 => {
+						Log.i("Dados do Usuário atual salvos: " + result2);
+					},
+					erro => {
+						Log.e("Erro ao setar usuário atual: " + erro);
+					}
+				);
+
+				this.navController.navigateForward(['itinerarios']);
 			}
 		);
 	}
@@ -85,12 +89,14 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 	//#endregion Botõe
 
 	//#region Login
-	async logaUsuario(){
+	async defineQualUsuarioLogou(){
 		return new Promise((resolve) => {
 			// if((this.email == "kryslan2680@gmail.com" && this.senha == "pokemon123")){
 				if((this.email == "a" && this.senha == "")){
 					this.storage.getAluno().then(
 						aluno => {
+							Log.d("aluno[0]", aluno[0]);
+							Log.d("aluno[0]", aluno[0].nome);
 							resolve([aluno[0], TiposDeUsuario.ALUNO]);
 						}
 					);
@@ -103,10 +109,13 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 				);
 			// }else if(this.email == "gabriel244468@gmail.com" && this.senha == "pokemon123"){
 			}else if(this.email == "a1" && this.senha == ""){
-				
-				let aluno: Aluno = new Aluno();
-
-				resolve([aluno, TiposDeUsuario.ALUNO]);
+				this.storage.getAluno().then(
+					aluno => {
+						Log.d("aluno[0]", aluno[0]);
+						Log.d("aluno[0]", aluno[0].nome);
+						resolve([aluno[1], TiposDeUsuario.ALUNO]);
+					}
+				);
 			// }else if(this.email == "fabioasilva94@gmail.com" && this.senha == "pokemon123"){
 			}else if(this.email == "m" && this.senha == ""){
 				this.storage.getMotorista().then(

@@ -4,6 +4,7 @@ import { Storage } from '@ionic/storage';
 import { Subject } from 'rxjs';
 
 import { Aluno, ListaDeAluno, Motorista, Responsavel } from '../entidades/Usuario';
+import { TiposDeUsuario } from '../utilitarios/Enum';
 import Log from '../utilitarios/Log';
 
 @Injectable({
@@ -15,11 +16,32 @@ export class StorageService {
   ALUNOS = "Alunos";
   MOTORISTA = "Motorista";
   RESPONSAVEL = "Responsavel";
+
+  TIPO_DE_USUARIO_ATUAL = "tipoDeUsuárioAtual";
+
+  DADOS_DO_USUARIO_ATUAL = "dadosDoUsuárioAtual";
   //#endregion Keys dos storages
+
+  /** Monitora o tipo de usuário atual */
+  usuarioAtual = TiposDeUsuario.ALUNO;
 
   constructor(
     private storage: Storage,
   ){}
+
+  setTipoDeUsuarioAtual(tipoDeUsuario: string){
+    return this.storage.set(this.TIPO_DE_USUARIO_ATUAL, tipoDeUsuario);
+  }
+  getTipoDeUsuarioAtual(){
+    return this.storage.get(this.TIPO_DE_USUARIO_ATUAL);
+  }
+
+  setUsuarioAtual(usuarioAtual){
+    return this.storage.set(this.DADOS_DO_USUARIO_ATUAL, usuarioAtual);
+  }
+  getUsuarioAtual(){
+    return this.storage.get(this.DADOS_DO_USUARIO_ATUAL);
+  }
 
   getAluno(): Promise<Aluno>{
     return this.storage.get(this.ALUNOS);
@@ -81,7 +103,7 @@ export class StorageService {
   }
   inserirMotorista(){
     let motorista: Motorista = new Motorista();
-    motorista.idUsuario = 0;
+    motorista.idUsuario = 2;
     motorista.email = "fabioasilva94@gmail.com";
     motorista.nome = "Fábio";
     motorista.nomeCompleto = "Fábio Alvarenga";
@@ -89,20 +111,20 @@ export class StorageService {
     motorista.idade = 29;
     motorista.idAlunos.push(0);
     motorista.idAlunos.push(1);
-    motorista.idResponsavel = 0;
+    motorista.idResponsavel = 3;
     // Log.i("Motorista Criado");
     return this.storage.set(this.MOTORISTA, motorista);
   }
   inserirResponsavel(){
     let responsavel: Responsavel = new Responsavel();
-    responsavel.idUsuario = 0;
+    responsavel.idUsuario = 3;
     responsavel.email = "sjs13990@gmail.com";
     responsavel.nome = "Sara";
     responsavel.nomeCompleto = "Sara de Jesus Santos";
     responsavel.telefone = "31995319857";
     responsavel.idade = 20;
     responsavel.idAluno = 0;
-    responsavel.idMotorista = 0;
+    responsavel.idMotorista = 1;
     // Log.i("Responsável Criado");
     return this.storage.set(this.RESPONSAVEL, responsavel);
   }
