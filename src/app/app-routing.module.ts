@@ -22,7 +22,15 @@ const routes: Routes = [
   {
     path: 'itinerarios',
     loadChildren: () => import('./paginas/itinerarios/itinerarios.module').then( m => m.ItinerariosPageModule)
+  },  {
+    path: 'alunos',
+    loadChildren: () => import('./paginas/alunos/alunos.module').then( m => m.AlunosPageModule)
   },
+  {
+    path: 'cadastro-de-itinerario',
+    loadChildren: () => import('./paginas/cadastro-de-itinerario/cadastro-de-itinerario.module').then( m => m.CadastroDeItinerarioPageModule)
+  },
+
 
 ];
 

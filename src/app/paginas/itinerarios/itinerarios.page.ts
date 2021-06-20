@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StatusBar } from '@capacitor/status-bar';
-import { MenuController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-itinerarios',
@@ -17,6 +17,7 @@ export class ItinerariosPage implements OnInit {
 	//#region Start
 	constructor(
 		private menu: MenuController,
+		private navController: NavController,
 	){
 		this.menu.enable(true);
 	}
@@ -32,7 +33,7 @@ export class ItinerariosPage implements OnInit {
 
 	//#region Botões
 	fabAdicionarItinerario_click(){
-
+		this.navController.navigateForward(["cadastro-de-itinerario"]);
 	}
 	//#endregion Botõe
 

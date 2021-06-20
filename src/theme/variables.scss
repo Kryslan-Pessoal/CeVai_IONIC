@@ -33,6 +33,12 @@ ion-button:disabled{
     #8BB569 100%
   );
 }
+.buttonDanger{
+  --background: #BB2D3B;
+}
+.buttonSuccess{
+  --background: #157347;
+}
 .card{
   background-color: #fff;
   box-shadow: none;
@@ -51,6 +57,7 @@ ion-button:disabled{
   border-width: thin;
   border-style: solid;
   border-radius: 5px;
+  color: black;
 }
 .input-desativado{
   border-color: #C6C6C6;

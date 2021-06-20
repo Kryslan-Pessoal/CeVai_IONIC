@@ -60,13 +60,13 @@ export class AppComponent {
   //#region Botões
 
   //LINA 2
-  /** Para Motorista */
-  aluno_click(){
-    //TODO: vai para a tela de contato, mostrando o contato do aluno
-  }
   /** Para Aluno e Responsável */
   motorista_click(){
     //TODO: vai para a tela de contato, mostrando o contato do motorista
+  }
+  /** Para Motorista */
+  alunos_click(){
+    this.navController.navigateForward(['alunos']);
   }
 
   //LINA 3

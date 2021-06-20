@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Cadastro de Itinerário</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <!-- Card -->
+  <ion-card class="card">
+    <ion-card-content>
+      <ion-grid>
+
+        <!-- Nome do Itinerário -->
+        <ion-item>
+          <ion-label position="floating">Nome do Itinerário:</ion-label>
+          <ion-input style="margin-top: 5px;" type="text"></ion-input>
+        </ion-item>
+
+        <!-- Sentido (DropDown) -->
+        <p style="color: black; font-size: 16px; margin-top:15px; margin-left: 15px;">Sentido:</p>
+        <ion-row>
+          <ion-col>
+            <ion-select interface="popover" class="input">
+              <ion-select-option value={{IDA}}>Ida</ion-select-option>
+              <ion-select-option value={{VOLTA}}>Volta</ion-select-option>
+            </ion-select>
+          </ion-col>
+        </ion-row>
+
+        <!-- Hora de Saída -->
+        <p style="color: black; font-size: 16px; margin-top:15px; margin-left: 15px;">Hora de Saída:</p>
+        <ion-row>
+          <ion-col>
+            <ion-datetime value="2019-10-01T15:43:40.394Z" displayFormat="h:mm a" class="input"></ion-datetime>
+          </ion-col>
+        </ion-row>
+
+        <!-- Local de Saída -->
+        <ion-item style="margin-top: 20px;">
+          <ion-label position="floating">Local de Saída:</ion-label>
+          <ion-input style="margin-top: 5px;" type="email"></ion-input>
+        </ion-item>
+
+        <!-- Parada (aluno) -->
+        <ion-row style="margin-top: 15px;">
+          <ion-col size="10">
+            <ion-item>
+              <ion-label position="floating">Parada (aluno):</ion-label>
+              <ion-input style="margin-top: 5px;" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button style="margin-right: 10%; margin-left: 10%;" class="buttonDanger center">
+              <ion-icon size="large" name="close-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <!-- Adicionar... -->
+        <ion-button expand="block" class="buttonSuccess">
+          ADICIONAR ALUNO
+          <ion-icon slot="start" name="add"></ion-icon>
+        </ion-button>
+
+        <!-- Parada (faculdade) -->
+        <ion-item style="margin-top: 15px;">
+          <ion-label position="floating">Parada (faculdade):</ion-label>
+          <ion-input style="margin-top: 5px;" type="text"></ion-input>
+        </ion-item>
+
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Adicionar... -->
+  <ion-button expand="block" style="margin-right: 5%; margin-left: 5%;">
+    CRIAR
+  </ion-button>
+
+</ion-content>
