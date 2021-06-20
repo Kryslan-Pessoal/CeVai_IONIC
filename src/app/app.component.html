@@ -53,18 +53,9 @@
             </ion-label>
           </ion-item>
         </ion-menu-toggle>
-        <!-- Dependentes (Motorista) -->
-        <ion-menu-toggle autoHide="false" *ngIf="tipoDeUsuarioAtual == MOTORISTA">
-          <ion-item (click)="dependentes_click()" routerDirection="root" detail="false" >
-            <ion-icon slot="start" name="people"></ion-icon>
-            <ion-label>
-              Responsável
-            </ion-label>
-          </ion-item>
-        </ion-menu-toggle>
         <!-- Dependente (Responsável) -->
-        <ion-menu-toggle autoHide="false" *ngIf="tipoDeUsuarioAtual == RESPONSAVEL">
-          <ion-item (click)="dependente_click()" routerDirection="root" detail="false" >
+        <ion-menu-toggle (click)="dependente_click()" autoHide="false" *ngIf="tipoDeUsuarioAtual == RESPONSAVEL">
+          <ion-item routerDirection="root" detail="false" >
             <ion-icon slot="start" name="people"></ion-icon>
             <ion-label>
               Dependente
@@ -74,8 +65,8 @@
 
         <!-- LINHA 4 -->
         <!-- Configurações -->
-        <ion-menu-toggle autoHide="false">
-          <ion-item (click)="configuracoes_click()" routerDirection="root" detail="false" >
+        <ion-menu-toggle (click)="configuracoes_click()" autoHide="false">
+          <ion-item routerDirection="root" detail="false" >
             <ion-icon slot="start" name="cog-outline"></ion-icon>
             <ion-label>
               Configurações
@@ -84,8 +75,8 @@
         </ion-menu-toggle>
 
         <!-- Sair -->
-        <ion-menu-toggle autoHide="false">
-          <ion-item (click)="sair_click()" routerLinkActive="active" routerDirection="root" detail="false">
+        <ion-menu-toggle (click)="sair_click()" autoHide="false">
+          <ion-item routerLinkActive="active" routerDirection="root" detail="false">
             <ion-icon slot="start" name="log-out"></ion-icon>
             <ion-label>
               Sair

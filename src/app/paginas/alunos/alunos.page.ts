@@ -14,10 +14,6 @@ export class AlunosPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.menu.enable(false);
-  }
-  ionViewDidLeave() {
-    this.menu.enable(true);
   }
 
   fabAdicionarAluno_click(){

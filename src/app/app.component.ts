@@ -75,10 +75,6 @@ export class AppComponent {
   responsavel_click(){
     this.navController.navigateForward(['contato']);
   }
-  /** Para Motorista */
-  dependentes_click(){
-    //TODO: vai para a tela de contato, mostrando os dependentes para o motorista
-  }
   /** Para Responsável */
   dependente_click(){
     //TODO: vai para a tela de responsável, mostrando o dependente 
