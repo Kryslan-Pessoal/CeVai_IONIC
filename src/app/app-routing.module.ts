@@ -30,6 +30,22 @@ const routes: Routes = [
     path: 'cadastro-de-itinerario',
     loadChildren: () => import('./paginas/cadastro-de-itinerario/cadastro-de-itinerario.module').then( m => m.CadastroDeItinerarioPageModule)
   },
+  {
+    path: 'rota',
+    loadChildren: () => import('./paginas/rota/rota.module').then( m => m.RotaPageModule)
+  },
+  {
+    path: 'check-in',
+    loadChildren: () => import('./paginas/check-in/check-in.module').then( m => m.CheckInPageModule)
+  },
+  {
+    path: 'mapa',
+    loadChildren: () => import('./paginas/mapa/mapa.module').then( m => m.MapaPageModule)
+  },
+  {
+    path: 'contato',
+    loadChildren: () => import('./paginas/contato/contato.module').then( m => m.ContatoPageModule)
+  },
 
 
 ];
