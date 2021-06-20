@@ -18,7 +18,27 @@ const routes: Routes = [
   {
     path: 'esqueceu-a-senha',
     loadChildren: () => import('./paginas/esqueceu-a-senha/esqueceu-a-senha.module').then( m => m.EsqueceuASenhaPageModule)
+  },  {
+    path: 'configuracoes',
+    loadChildren: () => import('./paginas/configuracoes/configuracoes.module').then( m => m.ConfiguracoesPageModule)
   },
+  {
+    path: 'configuracoes-conta',
+    loadChildren: () => import('./paginas/configuracoes-conta/configuracoes-conta.module').then( m => m.ConfiguracoesContaPageModule)
+  },
+  {
+    path: 'endereco',
+    loadChildren: () => import('./paginas/endereco/endereco.module').then( m => m.EnderecoPageModule)
+  },
+  {
+    path: 'pagamentos',
+    loadChildren: () => import('./paginas/pagamentos/pagamentos.module').then( m => m.PagamentosPageModule)
+  },
+  {
+    path: 'notificacoes',
+    loadChildren: () => import('./paginas/notificacoes/notificacoes.module').then( m => m.NotificacoesPageModule)
+  },
+
 ];
 
 @NgModule({
