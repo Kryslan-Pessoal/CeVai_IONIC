@@ -30,12 +30,10 @@ export class ItinerariosPage implements OnInit {
   }
 	//#endregion Start
 
-	//#region Listerners
-
-	//#endregion Listerners
-
 	//#region Botões
+	fabAdicionarItinerario_click(){
 
+	}
 	//#endregion Botõe
 
 	//#region Utilitários
