@@ -12,4 +12,8 @@ export class CheckInPage implements OnInit {
   ngOnInit() {
   }
 
+  iniciarRota_fabClick(){
+    //TODO: Manda pro mapa
+  }
+
 }
