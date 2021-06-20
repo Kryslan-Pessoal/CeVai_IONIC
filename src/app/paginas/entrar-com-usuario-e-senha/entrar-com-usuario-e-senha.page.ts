@@ -2,8 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StatusBar } from '@capacitor/status-bar';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
+import { Subject } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
 import { Aluno, Motorista, Responsavel, Usuario } from 'src/app/entidades/Usuario';
+import { StorageService } from 'src/app/storage/storage.service';
 import { TiposDeUsuario } from 'src/app/utilitarios/Enum';
+import Log from 'src/app/utilitarios/Log';
 
 @Component({
   selector: 'app-entrar-com-usuario-e-senha',
@@ -24,12 +28,21 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 		private navController: NavController,
 		private toastController: ToastController,
 		private router: Router,
-	){
-	}
+		private storage: StorageService,
+		private appComponent: AppComponent,
+	){}
 
 	ngOnInit(){
 		this.configuraStatusBar();
 	}
+
+	private subject = new Subject<any>();
+  atualizaObservavelTipoDeUsuario(tipoDeUsuario: any) {
+    this.subject.next(tipoDeUsuario);
+  }
+  public getTipoDeUsuario(): Subject<any> {
+    return this.subject;
+  }
 
 	//TODO: debug
 	ngAfterViewInit() {
@@ -50,15 +63,19 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 		// 	return;
 		// }
 
+		this.navController.navigateRoot(['itinerarios']);
 		//Caso senha e email válidos
 		this.logaUsuario().then(
 			result => {
-				this.router.navigate(['itinerarios'], { 
+				this.navController.navigateForward(['itinerarios'], { 
 					state: { 
-					  dadosDoFormulario: result[0],
+					  informacoesDoUsuario: result[0],
 					  tipoDeUsuario: result[1]
 					}
 				});
+
+				// AppComponent.tipoDeUsuario = result[1];
+				// AppComponent.nomeDoUsuario = result[0].nome;
 			}
 		);
 	}
@@ -72,14 +89,18 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 		return new Promise((resolve) => {
 			// if((this.email == "kryslan2680@gmail.com" && this.senha == "pokemon123")){
 				if((this.email == "a" && this.senha == "")){
-
-				//resolve([aluno, TiposDeUsuario.ALUNO]);
+					this.storage.getAluno().then(
+						aluno => {
+							resolve([aluno[0], TiposDeUsuario.ALUNO]);
+						}
+					);
 			// }else if(this.email == "sjs13990@gmail.com" && this.senha == "pokemon123"){
 			}else if(this.email == "r" && this.senha == ""){
-				
-				let responsavel: Responsavel = new Responsavel();
-
-				resolve([responsavel, TiposDeUsuario.RESPONSAVEL_PELO_ALUNO]);
+				this.storage.getResponsavel().then(
+					responsavel => {
+						resolve([responsavel, TiposDeUsuario.RESPONSAVEL]);
+					}
+				);
 			// }else if(this.email == "gabriel244468@gmail.com" && this.senha == "pokemon123"){
 			}else if(this.email == "a1" && this.senha == ""){
 				
@@ -88,10 +109,11 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 				resolve([aluno, TiposDeUsuario.ALUNO]);
 			// }else if(this.email == "fabioasilva94@gmail.com" && this.senha == "pokemon123"){
 			}else if(this.email == "m" && this.senha == ""){
-				
-				let motorista: Motorista = new Motorista();
-
-				resolve([motorista, TiposDeUsuario.MOTORISTA]);
+				this.storage.getMotorista().then(
+					motorista => {
+						resolve([motorista, TiposDeUsuario.MOTORISTA]);
+					}
+				);
 			}else{
 				this.alert("Erro!", "Usuário e/ou senha errados!");
 			}

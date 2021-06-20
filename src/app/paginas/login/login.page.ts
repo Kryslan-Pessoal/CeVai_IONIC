@@ -27,8 +27,6 @@ export class HomePage {
 
     this.menu.enable(false);
 
-    this.storageService.inicializarBanco();
-    
   }
   //#endregion Start
 

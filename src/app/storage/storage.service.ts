@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { Storage } from '@ionic/storage';
-import { TiposDeUsuario } from '../utilitarios/Enum';
+import { Subject } from 'rxjs';
 
 import { Aluno, ListaDeAluno, Motorista, Responsavel } from '../entidades/Usuario';
 import Log from '../utilitarios/Log';
@@ -21,8 +21,18 @@ export class StorageService {
     private storage: Storage,
   ){}
 
+  getAluno(): Promise<Aluno>{
+    return this.storage.get(this.ALUNOS);
+  }
+  getResponsavel(): Promise<Responsavel>{
+    return this.storage.get(this.RESPONSAVEL);
+  }
+  getMotorista(): Promise<Motorista>{
+    return this.storage.get(this.MOTORISTA);
+  }
+
   /** Configura Banco pela primeira vez ao abrir o App */
-  async inicializarBanco(){
+  inicializarBanco(){
 
     this.inserirUsuarios();
 
@@ -67,7 +77,7 @@ export class StorageService {
     listaDeAluno.aluno.push(aluno1);
     listaDeAluno.aluno.push(aluno2);
     // Log.i("Alunos Criados");
-    return this.storage.set(this.ALUNOS, listaDeAluno);
+    return this.storage.set(this.ALUNOS, listaDeAluno.aluno);
   }
   inserirMotorista(){
     let motorista: Motorista = new Motorista();
@@ -93,7 +103,7 @@ export class StorageService {
     responsavel.idade = 20;
     responsavel.idAluno = 0;
     responsavel.idMotorista = 0;
-    Log.i("Responsável Criado");
+    // Log.i("Responsável Criado");
     return this.storage.set(this.RESPONSAVEL, responsavel);
   }
   //#endregion Configura Banco

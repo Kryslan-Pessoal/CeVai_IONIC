@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
+import { Subject } from 'rxjs';
+import { EntrarComUsuarioESenhaPage } from './paginas/entrar-com-usuario-e-senha/entrar-com-usuario-e-senha.page';
+import { StorageService } from './storage/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -17,12 +20,17 @@ export class AppComponent {
   constructor(
     private alertController : AlertController,
     private navController : NavController,
+    private storageService: StorageService,
   ){
+
+    // this.storageService.inicializarBanco();
+
     this.configuraUsuarioAtual();
+
   }
 
+
   configuraUsuarioAtual(){
-    this.tipoDeUsuario = "Aluno";
     this.nomeDoUsuario = "Kryslan";
   }
 

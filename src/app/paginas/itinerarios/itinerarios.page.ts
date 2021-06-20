@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { StatusBar } from '@capacitor/status-bar';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-itinerarios',
@@ -14,7 +15,11 @@ export class ItinerariosPage implements OnInit {
 
 
 	//#region Start
-	constructor(){}
+	constructor(
+		private menu: MenuController,
+	){
+		this.menu.enable(true);
+	}
 
 	ngOnInit(){}
 	//TODO: debug
