@@ -1,3 +1,93 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+
+  <!-- Menu Lateral -->
+  <ion-menu contentId="main-content">
+    <ion-content>
+      <ion-list lines="none">
+
+        <h2 class="h2" style="padding-left: 13px;">
+          {{nomeDoUsuario}}
+        </h2>
+        <h4 class="h4" style="padding-left: 13px;">
+          {{tipoDeUsuarioAtual}}
+        </h4>
+       
+        <!-- LINHA 1 -->
+        <!-- Itinerários -->
+        <ion-menu-toggle>
+          <ion-item routerLink="/itinerarios" routerLinkActive="active" routerDirection="root" detail="false">
+            <ion-icon slot="start" name="time"></ion-icon>
+            <ion-label>
+              Itinerários
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <!-- LINHA 2 -->
+        <!-- Motorista (Aluno e Responsável) -->
+        <ion-menu-toggle (click)="motorista_click()" *ngIf="tipoDeUsuarioAtual == ALUNO || tipoDeUsuarioAtual == RESPONSAVEL">
+          <ion-item routerLinkActive="active" routerDirection="root" detail="false">
+            <ion-icon slot="start" name="person"></ion-icon>
+            <ion-label>
+              Motorista
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <!-- Alunos (Motorista) -->
+        <ion-menu-toggle (click)="alunos_click()" autoHide="false" *ngIf="tipoDeUsuarioAtual == MOTORISTA">
+          <ion-item  routerLinkActive="selected" routerDirection="root" detail="false">
+            <ion-icon slot="start" name="person"></ion-icon>
+            <ion-label>
+              Alunos
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <!-- LINHA 3 -->
+        <!-- Responsável (Aluno) -->
+        <ion-menu-toggle (click)="responsavel_click()" *ngIf="tipoDeUsuarioAtual == ALUNO">
+          <ion-item routerDirection="root" detail="false" >
+            <ion-icon slot="start" name="people"></ion-icon>
+            <ion-label>
+              Responsável
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <!-- Dependente (Responsável) -->
+        <ion-menu-toggle (click)="dependente_click()" autoHide="false" *ngIf="tipoDeUsuarioAtual == RESPONSAVEL">
+          <ion-item routerDirection="root" detail="false" >
+            <ion-icon slot="start" name="people"></ion-icon>
+            <ion-label>
+              Dependente
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <!-- LINHA 4 -->
+        <!-- Configurações -->
+        <ion-menu-toggle (click)="configuracoes_click()" autoHide="false">
+          <ion-item routerDirection="root" detail="false" >
+            <ion-icon slot="start" name="cog-outline"></ion-icon>
+            <ion-label>
+              Configurações
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <!-- Sair -->
+        <ion-menu-toggle (click)="sair_click()" autoHide="false">
+          <ion-item routerLinkActive="active" routerDirection="root" detail="false">
+            <ion-icon slot="start" name="log-out"></ion-icon>
+            <ion-label>
+              Sair
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+
+      </ion-list>
+
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main-content"></ion-router-outlet>
 </ion-app>

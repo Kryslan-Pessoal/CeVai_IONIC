@@ -2,8 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StatusBar } from '@capacitor/status-bar';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
-import { Aluno, Motorista, Responsavel, Usuario } from 'src/app/entidades/aluno';
+import { Subject } from 'rxjs';
+import { AppComponent } from 'src/app/app.component';
+import { StorageService } from 'src/app/storage/storage.service';
 import { TiposDeUsuario } from 'src/app/utilitarios/Enum';
+import Log from 'src/app/utilitarios/Log';
 
 @Component({
   selector: 'app-entrar-com-usuario-e-senha',
@@ -13,9 +16,8 @@ import { TiposDeUsuario } from 'src/app/utilitarios/Enum';
 export class EntrarComUsuarioESenhaPage implements OnInit {
 
 	//#region Globais
-	email: string = "";
-	senha: string = "";
-
+	email = "";
+	senha = "";
 	//#endregion Globais
 
 
@@ -24,19 +26,21 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 		private alertController: AlertController,
 		private navController: NavController,
 		private toastController: ToastController,
-		private router: Router,
+		private storage: StorageService,
+		private appComponent: AppComponent,
 	){}
 
 	ngOnInit(){
 		this.configuraStatusBar();
 	}
 
-	//TODO: debug
-	ngAfterViewInit() {
-		setTimeout(() => {
-			// console.clear();
-		}, 1000);
-	}
+	private subject = new Subject<any>();
+  atualizaObservavelTipoDeUsuario(tipoDeUsuario: any) {
+    this.subject.next(tipoDeUsuario);
+  }
+  public getTipoDeUsuario(): Subject<any> {
+    return this.subject;
+  }
 	//#endregion Start
 
 	//#region Botões
@@ -45,20 +49,36 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 			this.toast("E-mail Não pode ser vazio!");
 			return;
 		}
-		if(this.senha == ""){
-			this.toast("Senha Não pode ser vazio!");
-			return;
-		}
+		// if(this.senha == ""){
+		// 	this.toast("Senha Não pode ser vazio!");
+		// 	return;
+		// }
+
+		this.navController.navigateRoot(['itinerarios']);
 
 		//Caso senha e email válidos
-		this.logaUsuario().then(
+		this.defineQualUsuarioLogou().then(
+			//Seta usuário no banco de dados
 			result => {
-				this.router.navigate(['nota-fiscal'], { 
-					state: { 
-					  dadosDoFormulario: result[0],
-					  tipoDeUsuario: result[1] 
-					} 
-				  });
+				this.storage.setTipoDeUsuarioAtual(result[1]).then(
+					result2 => {
+						Log.i("Tipo de usuário atual definido: " + result2);
+					},
+					erro => {
+						Log.e("Erro ao setar usuário atual: " + erro);
+					}
+				);
+
+				this.storage.setUsuarioAtual(result[0]).then(
+					result2 => {
+						Log.i("Dados do Usuário atual salvos: " + result2);
+					},
+					erro => {
+						Log.e("Erro ao setar usuário atual: " + erro);
+					}
+				);
+
+				this.navController.navigateForward(['itinerarios']);
 			}
 		);
 	}
@@ -68,73 +88,44 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 	//#endregion Botõe
 
 	//#region Login
-	async logaUsuario(){
+	async defineQualUsuarioLogou(){
 		return new Promise((resolve) => {
-			if((this.email == "kryslan2680@gmail.com" && this.senha == "pokemon123")){
-				
-				let aluno: Aluno = new Aluno();
-
-				//TODO: informação gravada no banco de dados, ao iniciar app
-				aluno.idUsuario = 0;
-				aluno.email = this.email;
-				aluno.nome = "Kryslan Gomes";
-				aluno.nomeCompleto = "Kryslan Gomes";
-				aluno.telefone = "31982665474";
-				aluno.idade = 24;
-				aluno.idResonsavel = 1;
-				aluno.idMotorista = 3;
-
-				resolve([aluno, TiposDeUsuario.ALUNO]);
-			}else if(this.email == "sjs13990@gmail.com" && this.senha == "pokemon123"){
-				
-				let responsavel: Responsavel = new Responsavel();
-
-				//TODO: informação gravada no banco de dados, ao iniciar app
-				responsavel.idUsuario = 1;
-				responsavel.email = this.email;
-				responsavel.nome = "Sara";
-				responsavel.nomeCompleto = "Sara de Jesus Santos";
-				responsavel.telefone = "31995319857";
-				responsavel.idade = 20;
-				responsavel.idAluno = 0;
-				responsavel.idMotorista = 3;
-
-				resolve([responsavel, TiposDeUsuario.RESPONSAVEL_PELO_ALUNO]);
-			}else if(this.email == "gabriel244468@gmail.com" && this.senha == "pokemon123"){
-				
-				let aluno: Aluno = new Aluno();
-
-				//TODO: informação gravada no banco de dados, ao iniciar app
-				aluno.idUsuario = 2;
-				aluno.email = this.email;
-				aluno.nome = "Gabriel";
-				aluno.nomeCompleto = "Gabriel Tsuyoshi Shibuya";
-				aluno.telefone = "119983513805";
-				aluno.idade = 29;
-				aluno.idResonsavel = 1;
-				aluno.idMotorista = 3;
-
-				resolve([aluno, TiposDeUsuario.ALUNO]);
-			}else if(this.email == "fabioasilva94@gmail.com" && this.senha == "pokemon123"){
-				
-				let motorista: Motorista = new Motorista();
-
-				//TODO: informação gravada no banco de dados, ao iniciar app
-				motorista.idUsuario = 3;
-				motorista.email = this.email;
-				motorista.nome = "Fábio";
-				motorista.nomeCompleto = "Fábio Alvarenga";
-				motorista.telefone = "31989916997";
-				motorista.idade = 29;
-				motorista.idAlunos[0] = 0;
-				motorista.idAlunos[1] = 2;
-				motorista.idResponsavel = 2;
-
-				resolve([motorista, TiposDeUsuario.MOTORISTA]);
+			// if((this.email == "kryslan2680@gmail.com" && this.senha == "pokemon123")){
+				if((this.email == "a" && this.senha == "")){
+					this.storage.getAluno().then(
+						aluno => {
+							Log.d("aluno[0]", aluno[0]);
+							Log.d("aluno[0]", aluno[0].nome);
+							resolve([aluno[0], TiposDeUsuario.ALUNO]);
+						}
+					);
+			// }else if(this.email == "sjs13990@gmail.com" && this.senha == "pokemon123"){
+			}else if(this.email == "r" && this.senha == ""){
+				this.storage.getResponsavel().then(
+					responsavel => {
+						resolve([responsavel, TiposDeUsuario.RESPONSAVEL]);
+					}
+				);
+			// }else if(this.email == "gabriel244468@gmail.com" && this.senha == "pokemon123"){
+			}else if(this.email == "a1" && this.senha == ""){
+				this.storage.getAluno().then(
+					aluno => {
+						Log.d("aluno[0]", aluno[0]);
+						Log.d("aluno[0]", aluno[0].nome);
+						resolve([aluno[1], TiposDeUsuario.ALUNO]);
+					}
+				);
+			// }else if(this.email == "fabioasilva94@gmail.com" && this.senha == "pokemon123"){
+			}else if(this.email == "m" && this.senha == ""){
+				this.storage.getMotorista().then(
+					motorista => {
+						resolve([motorista, TiposDeUsuario.MOTORISTA]);
+					}
+				);
 			}else{
 				this.alert("Erro!", "Usuário e/ou senha errados!");
 			}
-		  })
+		});
 	}
 	//#endregion Login
 
@@ -152,7 +143,7 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 			message: mensagem,
 			buttons: [{
 			text: 'Ok',
-			handler: () => {   
+			handler: () => {
 				this.navController.back();
 			}
 			}]

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Itinerários</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Card -->
+  <ion-card class="card" (click)="rota_cardClick()">
+    <ion-card-content>
+      <ion-grid>
+        <!-- Título -->
+        <ion-row>
+          <ion-col>
+            <h1 class="h1">
+              Manhã - Ida
+            </h1>
+         </ion-col>
+        </ion-row>
+        <!-- Rota -->
+        <ion-row>
+          <ion-col>
+            Rota: <b>Timóteo - Fabriciano - Ipatinga</b>
+          </ion-col>
+        </ion-row>
+        <!-- Faculdade -->
+        <ion-row>
+          <ion-col>
+            Rota: <b>Timóteo - Fabriciano - Ipatinga</b>
+          </ion-col>
+        </ion-row>
+        <!-- Horário -->
+        <ion-row>
+          <ion-col>
+            <p>08:00</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button routerLink="/check-in">NAVEGAR PARA CHECK-IN</ion-button>
+</ion-content>
+
+<!-- FAB Adicionar Itinerário -->
+<ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 15px; margin-right: 15px;">
+  <ion-fab-button (click)="fabAdicionarItinerario_click()">
+    <ion-icon name="add"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
