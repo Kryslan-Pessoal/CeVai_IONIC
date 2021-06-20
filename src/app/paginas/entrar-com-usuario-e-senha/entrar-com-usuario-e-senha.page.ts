@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { StatusBar } from '@capacitor/status-bar';
 import { AlertController, NavController, ToastController } from '@ionic/angular';
-import { Aluno, Motorista, Responsavel, Usuario } from 'src/app/entidades/aluno';
+import { Aluno, Motorista, Responsavel, Usuario } from 'src/app/entidades/Usuario';
 import { TiposDeUsuario } from 'src/app/utilitarios/Enum';
 
 @Component({
@@ -13,9 +13,8 @@ import { TiposDeUsuario } from 'src/app/utilitarios/Enum';
 export class EntrarComUsuarioESenhaPage implements OnInit {
 
 	//#region Globais
-	email: string = "";
-	senha: string = "";
-
+	email = "";
+	senha = "";
 	//#endregion Globais
 
 
@@ -25,7 +24,8 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 		private navController: NavController,
 		private toastController: ToastController,
 		private router: Router,
-	){}
+	){
+	}
 
 	ngOnInit(){
 		this.configuraStatusBar();
@@ -45,20 +45,20 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 			this.toast("E-mail Não pode ser vazio!");
 			return;
 		}
-		if(this.senha == ""){
-			this.toast("Senha Não pode ser vazio!");
-			return;
-		}
+		// if(this.senha == ""){
+		// 	this.toast("Senha Não pode ser vazio!");
+		// 	return;
+		// }
 
 		//Caso senha e email válidos
 		this.logaUsuario().then(
 			result => {
-				this.router.navigate(['nota-fiscal'], { 
+				this.router.navigate(['itinerarios'], { 
 					state: { 
 					  dadosDoFormulario: result[0],
-					  tipoDeUsuario: result[1] 
-					} 
-				  });
+					  tipoDeUsuario: result[1]
+					}
+				});
 			}
 		);
 	}
@@ -70,71 +70,32 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 	//#region Login
 	async logaUsuario(){
 		return new Promise((resolve) => {
-			if((this.email == "kryslan2680@gmail.com" && this.senha == "pokemon123")){
-				
-				let aluno: Aluno = new Aluno();
+			// if((this.email == "kryslan2680@gmail.com" && this.senha == "pokemon123")){
+				if((this.email == "a" && this.senha == "")){
 
-				//TODO: informação gravada no banco de dados, ao iniciar app
-				aluno.idUsuario = 0;
-				aluno.email = this.email;
-				aluno.nome = "Kryslan Gomes";
-				aluno.nomeCompleto = "Kryslan Gomes";
-				aluno.telefone = "31982665474";
-				aluno.idade = 24;
-				aluno.idResonsavel = 1;
-				aluno.idMotorista = 3;
-
-				resolve([aluno, TiposDeUsuario.ALUNO]);
-			}else if(this.email == "sjs13990@gmail.com" && this.senha == "pokemon123"){
+				//resolve([aluno, TiposDeUsuario.ALUNO]);
+			// }else if(this.email == "sjs13990@gmail.com" && this.senha == "pokemon123"){
+			}else if(this.email == "r" && this.senha == ""){
 				
 				let responsavel: Responsavel = new Responsavel();
 
-				//TODO: informação gravada no banco de dados, ao iniciar app
-				responsavel.idUsuario = 1;
-				responsavel.email = this.email;
-				responsavel.nome = "Sara";
-				responsavel.nomeCompleto = "Sara de Jesus Santos";
-				responsavel.telefone = "31995319857";
-				responsavel.idade = 20;
-				responsavel.idAluno = 0;
-				responsavel.idMotorista = 3;
-
 				resolve([responsavel, TiposDeUsuario.RESPONSAVEL_PELO_ALUNO]);
-			}else if(this.email == "gabriel244468@gmail.com" && this.senha == "pokemon123"){
+			// }else if(this.email == "gabriel244468@gmail.com" && this.senha == "pokemon123"){
+			}else if(this.email == "a1" && this.senha == ""){
 				
 				let aluno: Aluno = new Aluno();
 
-				//TODO: informação gravada no banco de dados, ao iniciar app
-				aluno.idUsuario = 2;
-				aluno.email = this.email;
-				aluno.nome = "Gabriel";
-				aluno.nomeCompleto = "Gabriel Tsuyoshi Shibuya";
-				aluno.telefone = "119983513805";
-				aluno.idade = 29;
-				aluno.idResonsavel = 1;
-				aluno.idMotorista = 3;
-
 				resolve([aluno, TiposDeUsuario.ALUNO]);
-			}else if(this.email == "fabioasilva94@gmail.com" && this.senha == "pokemon123"){
+			// }else if(this.email == "fabioasilva94@gmail.com" && this.senha == "pokemon123"){
+			}else if(this.email == "m" && this.senha == ""){
 				
 				let motorista: Motorista = new Motorista();
-
-				//TODO: informação gravada no banco de dados, ao iniciar app
-				motorista.idUsuario = 3;
-				motorista.email = this.email;
-				motorista.nome = "Fábio";
-				motorista.nomeCompleto = "Fábio Alvarenga";
-				motorista.telefone = "31989916997";
-				motorista.idade = 29;
-				motorista.idAlunos[0] = 0;
-				motorista.idAlunos[1] = 2;
-				motorista.idResponsavel = 2;
 
 				resolve([motorista, TiposDeUsuario.MOTORISTA]);
 			}else{
 				this.alert("Erro!", "Usuário e/ou senha errados!");
 			}
-		  })
+		});
 	}
 	//#endregion Login
 
@@ -152,7 +113,7 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 			message: mensagem,
 			buttons: [{
 			text: 'Ok',
-			handler: () => {   
+			handler: () => {
 				this.navController.back();
 			}
 			}]

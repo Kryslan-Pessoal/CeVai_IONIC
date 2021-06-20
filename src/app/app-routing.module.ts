@@ -3,12 +3,12 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
+    path: 'login',
     loadChildren: () => import('./paginas/login/login.module').then( m => m.HomePageModule)
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
   },
   {
@@ -19,6 +19,11 @@ const routes: Routes = [
     path: 'esqueceu-a-senha',
     loadChildren: () => import('./paginas/esqueceu-a-senha/esqueceu-a-senha.module').then( m => m.EsqueceuASenhaPageModule)
   },
+  {
+    path: 'itinerarios',
+    loadChildren: () => import('./paginas/itinerarios/itinerarios.module').then( m => m.ItinerariosPageModule)
+  },
+
 ];
 
 @NgModule({
