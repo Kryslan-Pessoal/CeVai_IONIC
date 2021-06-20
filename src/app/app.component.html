@@ -25,8 +25,8 @@
 
         <!-- LINHA 2 -->
         <!-- Motorista (Aluno e Responsável) -->
-        <ion-menu-toggle autoHide="false" *ngIf="tipoDeUsuarioAtual == ALUNO || tipoDeUsuarioAtual == RESPONSAVEL">
-          <ion-item (click)="motorista_click()" routerLinkActive="active" routerDirection="root" detail="false">
+        <ion-menu-toggle (click)="motorista_click()" *ngIf="tipoDeUsuarioAtual == ALUNO || tipoDeUsuarioAtual == RESPONSAVEL">
+          <ion-item routerLinkActive="active" routerDirection="root" detail="false">
             <ion-icon slot="start" name="person"></ion-icon>
             <ion-label>
               Motorista
@@ -34,8 +34,8 @@
           </ion-item>
         </ion-menu-toggle>
         <!-- Alunos (Motorista) -->
-        <ion-menu-toggle autoHide="false" *ngIf="tipoDeUsuarioAtual == MOTORISTA">
-          <ion-item (click)="alunos_click()" routerLinkActive="selected" routerDirection="root" detail="false">
+        <ion-menu-toggle (click)="alunos_click()" autoHide="false" *ngIf="tipoDeUsuarioAtual == MOTORISTA">
+          <ion-item  routerLinkActive="selected" routerDirection="root" detail="false">
             <ion-icon slot="start" name="person"></ion-icon>
             <ion-label>
               Alunos
@@ -45,8 +45,8 @@
 
         <!-- LINHA 3 -->
         <!-- Responsável (Aluno) -->
-        <ion-menu-toggle autoHide="false" *ngIf="tipoDeUsuarioAtual == ALUNO">
-          <ion-item (click)="responsavel_click()" routerDirection="root" detail="false" >
+        <ion-menu-toggle (click)="responsavel_click()" *ngIf="tipoDeUsuarioAtual == ALUNO">
+          <ion-item routerDirection="root" detail="false" >
             <ion-icon slot="start" name="people"></ion-icon>
             <ion-label>
               Responsável

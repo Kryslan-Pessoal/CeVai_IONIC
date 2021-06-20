@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-alunos',
@@ -10,9 +10,14 @@ export class AlunosPage implements OnInit {
 
   constructor(
     private toastController: ToastController,
+    private menu: MenuController,
   ) { }
 
   ngOnInit() {
+    this.menu.enable(false);
+  }
+  ionViewDidLeave() {
+    this.menu.enable(true);
   }
 
   fabAdicionarAluno_click(){

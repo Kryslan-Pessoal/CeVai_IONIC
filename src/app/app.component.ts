@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 import { EntrarComUsuarioESenhaPage } from './paginas/entrar-com-usuario-e-senha/entrar-com-usuario-e-senha.page';
 import { StorageService } from './storage/storage.service';
 import { TiposDeUsuario } from './utilitarios/Enum';
+import Log from './utilitarios/Log';
 
 @Component({
   selector: 'app-root',
@@ -62,7 +63,7 @@ export class AppComponent {
   //LINA 2
   /** Para Aluno e Responsável */
   motorista_click(){
-    //TODO: vai para a tela de contato, mostrando o contato do motorista
+    this.navController.navigateForward(['contato']);
   }
   /** Para Motorista */
   alunos_click(){
@@ -72,7 +73,7 @@ export class AppComponent {
   //LINA 3
   /** Para Aluno */
   responsavel_click(){
-    //TODO: vai para a tela de contato, mostrando o contato do responsável
+    this.navController.navigateForward(['contato']);
   }
   /** Para Motorista */
   dependentes_click(){

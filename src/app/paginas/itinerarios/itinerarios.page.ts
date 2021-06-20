@@ -19,16 +19,10 @@ export class ItinerariosPage implements OnInit {
 		private menu: MenuController,
 		private navController: NavController,
 	){
+		this.configuraStatusBar();
 		this.menu.enable(true);
 	}
-
 	ngOnInit(){}
-	//TODO: debug
-  ngAfterViewInit() {
-    setTimeout(() => {
-      // console.clear();
-    }, 1000);
-  }
 	//#endregion Start
 
 	//#region Botões
@@ -42,7 +36,7 @@ export class ItinerariosPage implements OnInit {
 
 	  StatusBar.setOverlaysWebView({ overlay: false });  //Deixa Toolbar visível
 
-	  StatusBar.setBackgroundColor({color:'#3D6222'});
+	  StatusBar.setBackgroundColor({color:'#F57C00'});
 
 	}
 	//#endregion Utilitários
