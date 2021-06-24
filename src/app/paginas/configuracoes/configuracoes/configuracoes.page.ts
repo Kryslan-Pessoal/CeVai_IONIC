@@ -39,6 +39,10 @@ export class ConfiguracoesPage implements OnInit{
     this.navController.navigateForward(["minhas-fotos"]);
   }
 
+  bancoDeDados_click(){
+    this.navController.navigateForward(["banco-de-dados"]);
+  }
+
   configuraStatusBar(){
     StatusBar.setOverlaysWebView({ overlay: false });
     StatusBar.setBackgroundColor({color:'#F57C00'});

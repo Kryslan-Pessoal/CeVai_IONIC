@@ -31,11 +31,7 @@ export class AppComponent {
     private navController : NavController,
     private storage: StorageService,
   ){
-
-    // this.storageService.inicializarBanco();
-
     this.configuraUsuarioAtual();
-
   }
 
   async configuraUsuarioAtual(){

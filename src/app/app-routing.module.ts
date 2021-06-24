@@ -71,6 +71,10 @@ const routes: Routes = [
     path: 'minhas-fotos',
     loadChildren: () => import('./paginas/configuracoes/minhas-fotos/minhas-fotos.module').then( m => m.MinhasFotosPageModule)
   },
+  {
+    path: 'banco-de-dados',
+    loadChildren: () => import('./paginas/configuracoes/banco-de-dados/banco-de-dados.module').then( m => m.BancoDeDadosPageModule)
+  },
 
 ];
 

@@ -1,25 +1,19 @@
 import { Local } from "./Local";
 
-export class Itinerarios{
-    idItinerario: number;
-    itinerarios: Itinerario[];
-}
-
 export class Itinerario{
-    
     nomeDoItinerario: string;
     /** {@link SentidoDoItinerario} */
     sentido: string;
-    /** Quantidade de faculdades que este Itinerário terá */
-    qtdFaculdades: number;
 
-    localDeSaida: Local;
+    parada1: Local;
+    parada2: Local;
+    parada3: Local;
+    parada4: Local;
+    parada5: Local;
 
-    faculdadeDestino1: Local;
-    faculdadeDestino2: Local;
+    faculdadeDestino: Local;
 
     horaDeSaida: string;
-    horaDeChegada: string;
 }
 
 export class SentidoDoItinerario{
