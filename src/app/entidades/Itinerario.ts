@@ -3,7 +3,9 @@ import { Local } from "./Local";
 export class Itinerario{
     nomeDoItinerario: string;
     /** {@link SentidoDoItinerario} */
-    sentido: string;
+    seIda: boolean;
+
+    seuLocal: Local;
 
     parada1: Local;
     parada2: Local;
@@ -14,9 +16,4 @@ export class Itinerario{
     faculdadeDestino: Local;
 
     horaDeSaida: string;
-}
-
-export class SentidoDoItinerario{
-    public static IDA = "ida";
-    public static VOLTA = "volta"; 
 }

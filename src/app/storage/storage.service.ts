@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { Storage } from '@ionic/storage';
 import { Subject } from 'rxjs';
-import { Itinerario, SentidoDoItinerario } from '../entidades/Itinerario';
+import { Itinerario } from '../entidades/Itinerario';
 import { Local } from '../entidades/Local';
 
 import { Aluno, ListaDeAluno, Motorista, Responsavel } from '../entidades/Usuario';
@@ -199,7 +199,7 @@ export class StorageService {
     "longitude"
   );
   pitagoras = new Local(
-    "Faculdade Única",
+    "Faculdade Pitágoras",
     "latitude",  //TODO: definir latitude e longitude!
     "longitude"
   );
@@ -213,14 +213,20 @@ export class StorageService {
     "latitude",  //TODO: definir latitude e longitude!
     "longitude"
   );
+  timoteo = new Local(
+    "Timóteo",
+    "latitude",  //TODO: definir latitude e longitude!
+    "longitude"
+  );
   //#endregion Locais
   inserirPitagorasIda(){
     let itinerario = new Itinerario();
     itinerario.nomeDoItinerario = "Manhã Pitágoras";
-    itinerario.sentido = SentidoDoItinerario.IDA;
+    itinerario.seIda = true;
     itinerario.faculdadeDestino = this.pitagoras;
     itinerario.parada1 = this.kryslan;
     itinerario.parada2 = this.gabriel;
+    itinerario.seuLocal = this.timoteo;
     itinerario.horaDeSaida = "08:00";
 
     this.setItinerario(itinerario);
@@ -228,20 +234,22 @@ export class StorageService {
   inserirPitagorasVolta(){
     let itinerario: Itinerario = new Itinerario();
     itinerario.nomeDoItinerario = "Manhã Pitágoras";
-    itinerario.sentido = SentidoDoItinerario.VOLTA;
+    itinerario.seIda = false;
     itinerario.faculdadeDestino = this.pitagoras;
     itinerario.parada1 = this.kryslan;
     itinerario.parada2 = this.gabriel;
-    itinerario.horaDeSaida = "08:00";
+    itinerario.seuLocal = this.timoteo;
+    itinerario.horaDeSaida = "11:40";
 
     this.setItinerario(itinerario);
   }
   inserirUnicaIda(){
     let itinerario: Itinerario = new Itinerario();
     itinerario.nomeDoItinerario = "Noite Única";
-    itinerario.sentido = SentidoDoItinerario.IDA;
+    itinerario.seIda = true;
     itinerario.faculdadeDestino = this.unica;
     itinerario.parada1 = this.kryslan;
+    itinerario.seuLocal = this.timoteo;
     itinerario.horaDeSaida = "18:00";
 
     this.setItinerario(itinerario);
@@ -249,9 +257,10 @@ export class StorageService {
   inserirUnicaVolta(){
     let itinerario: Itinerario = new Itinerario();
     itinerario.nomeDoItinerario = "Noite Única";
-    itinerario.sentido = SentidoDoItinerario.VOLTA;
+    itinerario.seIda = false;
     itinerario.faculdadeDestino = this.unica;
     itinerario.parada1 = this.kryslan;
+    itinerario.seuLocal = this.timoteo;
     itinerario.horaDeSaida = "22:00";
 
     this.setItinerario(itinerario);
