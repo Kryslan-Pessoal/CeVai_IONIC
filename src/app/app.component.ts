@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { Subject } from 'rxjs';
-import { EntrarComUsuarioESenhaPage } from './paginas/entrar-com-usuario-e-senha/entrar-com-usuario-e-senha.page';
+import { EntrarComUsuarioESenhaPage } from './paginas/login/entrar-com-usuario-e-senha/entrar-com-usuario-e-senha.page';
 import { StorageService } from './storage/storage.service';
 import { TiposDeUsuario } from './utilitarios/Enum';
 import Log from './utilitarios/Log';
@@ -83,7 +83,7 @@ export class AppComponent {
   //LINHA 4
   /** Para Todos */
   configuracoes_click(){
-    //TODO: vai para a tela de configurações
+    this.navController.navigateForward(['configuracoes']);
   }
   
   //LINHA 5

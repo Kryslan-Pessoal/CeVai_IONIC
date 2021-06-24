@@ -17,45 +17,28 @@ export class ConfiguracoesPage implements OnInit{
     public router: Router,
     private navController : NavController,
     public menu: MenuController,
-  ) { }
+  ){}
 
   ngOnInit() {
     this.configuraStatusBar();
-
-    this.menu.enable(false);
-
   }
 
   telaGeralConfiguracoes_click(){
-    this.navController.navigateForward(
-      ["configuracoes-conta"]);
+    this.navController.navigateForward(["configuracoes-conta"]);
   }
-
   telaNotificacoes_click(){
-    this.navController.navigateForward(
-      ["notificacoes"]);
+    this.navController.navigateForward(["notificacoes"]);
   }
-
   telaPagamentos_click(){
-    this.navController.navigateForward(
-      ["pagamentos"]);
+    this.navController.navigateForward(["pagamentos"]);
   }
-
   telaEndereco_click(){
-    this.navController.navigateForward(
-      ["endereco"]);
+    this.navController.navigateForward(["endereco"]);
   }
-  /** telaGeralConfiguracoes_click(){
-    this.navController.navigateForward(
-      [""]);
-  } */
-
+  telaFotos_click(){}
 
   configuraStatusBar(){
-    
-    StatusBar.setOverlaysWebView({ overlay: true });  //Deixa statusbar Transparente
-
-    StatusBar.setBackgroundColor({color:'#CCCCCC'});
-
+    StatusBar.setOverlaysWebView({ overlay: false });
+    StatusBar.setBackgroundColor({color:'#F57C00'});
   }
 }
