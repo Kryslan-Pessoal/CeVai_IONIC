@@ -47,10 +47,31 @@ const routes: Routes = [
     path: 'contato',
     loadChildren: () => import('./paginas/usuarios/contato/contato.module').then( m => m.ContatoPageModule)
   },
+  //CONFIGURAÇÕES
   {
     path: 'configuracoes',
     loadChildren: () => import('./paginas/configuracoes/configuracoes/configuracoes.module').then( m => m.ConfiguracoesPageModule)
   },
+  {
+    path: 'configuracoes-conta',
+    loadChildren: () => import('./paginas/configuracoes/configuracoes-conta/configuracoes-conta.module').then( m => m.ConfiguracoesContaPageModule)
+  },
+  {
+    path: 'notificacoes',
+    loadChildren: () => import('./paginas/configuracoes/notificacoes/notificacoes.module').then( m => m.NotificacoesPageModule)
+  },
+  {
+    path: 'pagamentos',
+    loadChildren: () => import('./paginas/configuracoes/pagamentos/pagamentos.module').then( m => m.PagamentosPageModule)
+  },
+  {
+    path: 'endereco',
+    loadChildren: () => import('./paginas/configuracoes/endereco-do-usuario/endereco.module').then( m => m.EnderecoPageModule)
+  },  {
+    path: 'minhas-fotos',
+    loadChildren: () => import('./paginas/configuracoes/minhas-fotos/minhas-fotos.module').then( m => m.MinhasFotosPageModule)
+  },
+
 ];
 
 @NgModule({

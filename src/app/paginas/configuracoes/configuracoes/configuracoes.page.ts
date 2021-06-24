@@ -23,19 +23,21 @@ export class ConfiguracoesPage implements OnInit{
     this.configuraStatusBar();
   }
 
-  telaGeralConfiguracoes_click(){
+  configuracoesDaConta_click(){
     this.navController.navigateForward(["configuracoes-conta"]);
   }
-  telaNotificacoes_click(){
+  notificacoes_click(){
     this.navController.navigateForward(["notificacoes"]);
   }
-  telaPagamentos_click(){
+  pagamentos_click(){
     this.navController.navigateForward(["pagamentos"]);
   }
-  telaEndereco_click(){
+  endereco_click(){
     this.navController.navigateForward(["endereco"]);
   }
-  telaFotos_click(){}
+  minhasFotos_click(){
+    this.navController.navigateForward(["minhas-fotos"]);
+  }
 
   configuraStatusBar(){
     StatusBar.setOverlaysWebView({ overlay: false });
