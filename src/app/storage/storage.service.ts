@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 
 import { Storage } from '@ionic/storage';
 import { Subject } from 'rxjs';
+import { Itinerario } from '../entidades/Itinerario';
+import { Local } from '../entidades/Local';
 
 import { Aluno, ListaDeAluno, Motorista, Responsavel } from '../entidades/Usuario';
 import { TiposDeUsuario } from '../utilitarios/Enum';
@@ -12,7 +14,7 @@ import Log from '../utilitarios/Log';
 })
 export class StorageService {
 
-  //#region Keys dos storages
+  //#region Keys
   ALUNOS_KEY = "Alunos";
   MOTORISTA_KEY = "Motorista";
   RESPONSAVEL_KEY = "Responsavel";
@@ -20,15 +22,28 @@ export class StorageService {
   TIPO_DE_USUARIO_ATUAL_KEY = "tipoDeUsuárioAtual";
 
   DADOS_DO_USUARIO_ATUAL_KEY = "dadosDoUsuárioAtual";
-  //#endregion Keys dos storages
 
+  ITINERARIOS_KEY = "Itinerários";
+  //#endregion Keys
+
+  //#region Globais
   /** Monitora o tipo de usuário atual */
   public usuarioAtual = TiposDeUsuario.ALUNO;
+  //#endregion Globais
 
+  //#region Start
   constructor(
     private storage: Storage,
   ){}
+  /** Configura Banco pela primeira vez ao abrir o App */
+  inicializarBanco(){
+    this.inserirUsuarios();
+    this.inserirItinerarios();
+    Log.i("Banco inicializado e populado.");
+  }
+  //#endregion Start
 
+  //#region Usuário
   /** Utilize o {@link Enum.TiposDeUsuario} */
   setTipoDeUsuarioAtual(tipoDeUsuario: string){
     this.usuarioAtual = tipoDeUsuario;
@@ -49,7 +64,7 @@ export class StorageService {
     return this.storage.get(this.DADOS_DO_USUARIO_ATUAL_KEY);
   }
 
-  getAluno(): Promise<Aluno>{
+  getAlunos(): Promise<Aluno>{
     return this.storage.get(this.ALUNOS_KEY);
   }
   getResponsavel(): Promise<Responsavel>{
@@ -58,24 +73,59 @@ export class StorageService {
   getMotorista(): Promise<Motorista>{
     return this.storage.get(this.MOTORISTA_KEY);
   }
+  //#endregion Usuário
 
-  /** Configura Banco pela primeira vez ao abrir o App */
-  inicializarBanco(){
-
-    this.inserirUsuarios();
-
-    Log.i("Banco inicializado e populado.");
-
+  //#region Itinerarios
+  /** Adiciona um Itinerário a lista de Itinerários */
+  setItinerario(itinerario: Itinerario){
+    return new Promise((resolve, reject) => {
+      this.getItinerarios().then(
+        itinerariosJaCadastrados => {
+          try{
+            itinerariosJaCadastrados.push(itinerario);
+            this.setItinerarios(itinerariosJaCadastrados).then(
+              result => {
+                resolve(result);
+              }, 
+              erro => {
+                Log.i("Erro no banco 1: " + erro);
+                reject(erro);
+              }
+            );
+          }catch(e){
+            Log.i("Erro 2: " + e);
+            let itinerarios = new Array<Itinerario>();
+            itinerarios.push(itinerario);
+            this.setItinerarios(itinerarios).then(() => {}, erro => {
+              Log.i("Erro no banco 3: " + erro);
+              reject(erro);
+            });
+          }
+        },
+        erro => {  //Caso não tenha nenhum itinerário cadastrado
+          Log.i("Erro no banco 3: " + erro);
+        }
+      );
+    });
   }
+  /** Seta Todos os Itinerários */
+  setItinerarios(itinerario: Itinerario[]){
+    Log.i("Itinerários REDEFINIDOS!")
+    return this.storage.set(this.ITINERARIOS_KEY, itinerario);
+  }
+  /** Pega Todos os Itinerários */
+  getItinerarios(){
+    return this.storage.get(this.ITINERARIOS_KEY);
+  }
+  //#endregion Itinerarios
+
+  
   //#region Configura Banco
   inserirUsuarios(){
-    
     this.inserirAlunos();
-
     this.inserirMotorista();
-
     this.inserirResponsavel();
-
+    Log.i("USUÁRIOS INSERIDOS");
   }
   inserirAlunos(){
     let listaDeAluno: ListaDeAluno = new ListaDeAluno();
@@ -133,6 +183,87 @@ export class StorageService {
     responsavel.idMotorista = 1;
     // Log.i("Responsável Criado");
     return this.storage.set(this.RESPONSAVEL_KEY, responsavel);
+  }
+
+  async inserirItinerarios(){
+    await this.inserirUnicaIda();
+    await this.inserirUnicaVolta();
+    await this.inserirPitagorasIda();
+    await this.inserirPitagorasVolta();
+    Log.i("ITINERÁRIOS INSERIDOS");
+  }
+  //#region Locais
+  unica = new Local(
+    "Faculdade Única",
+    "latitude",  //TODO: definir latitude e longitude!
+    "longitude"
+  );
+  pitagoras = new Local(
+    "Faculdade Pitágoras",
+    "latitude",  //TODO: definir latitude e longitude!
+    "longitude"
+  );
+  kryslan = new Local(
+    "Kryslan",
+    "latitude",  //TODO: definir latitude e longitude!
+    "longitude"
+  );
+  gabriel = new Local(
+    "Gabriel",
+    "latitude",  //TODO: definir latitude e longitude!
+    "longitude"
+  );
+  timoteo = new Local(
+    "Timóteo",
+    "latitude",  //TODO: definir latitude e longitude!
+    "longitude"
+  );
+  //#endregion Locais
+  inserirPitagorasIda(){
+    let itinerario = new Itinerario();
+    itinerario.nomeDoItinerario = "Manhã Pitágoras";
+    itinerario.seIda = true;
+    itinerario.faculdadeDestino = this.pitagoras;
+    itinerario.parada1 = this.kryslan;
+    itinerario.parada2 = this.gabriel;
+    itinerario.seuLocal = this.timoteo;
+    itinerario.horaDeSaida = "08:00";
+
+    this.setItinerario(itinerario);
+  }
+  inserirPitagorasVolta(){
+    let itinerario: Itinerario = new Itinerario();
+    itinerario.nomeDoItinerario = "Manhã Pitágoras";
+    itinerario.seIda = false;
+    itinerario.faculdadeDestino = this.pitagoras;
+    itinerario.parada1 = this.kryslan;
+    itinerario.parada2 = this.gabriel;
+    itinerario.seuLocal = this.timoteo;
+    itinerario.horaDeSaida = "11:40";
+
+    this.setItinerario(itinerario);
+  }
+  inserirUnicaIda(){
+    let itinerario: Itinerario = new Itinerario();
+    itinerario.nomeDoItinerario = "Noite Única";
+    itinerario.seIda = true;
+    itinerario.faculdadeDestino = this.unica;
+    itinerario.parada1 = this.kryslan;
+    itinerario.seuLocal = this.timoteo;
+    itinerario.horaDeSaida = "18:00";
+
+    this.setItinerario(itinerario);
+  }
+  inserirUnicaVolta(){
+    let itinerario: Itinerario = new Itinerario();
+    itinerario.nomeDoItinerario = "Noite Única";
+    itinerario.seIda = false;
+    itinerario.faculdadeDestino = this.unica;
+    itinerario.parada1 = this.kryslan;
+    itinerario.seuLocal = this.timoteo;
+    itinerario.horaDeSaida = "22:00";
+
+    this.setItinerario(itinerario);
   }
   //#endregion Configura Banco
 }

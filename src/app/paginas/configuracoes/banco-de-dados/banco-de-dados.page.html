@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar class="toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>Banco de Dados</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-grid style="margin: 20px;">
+    <h1>GERAL</h1>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="resetarBanco()" class="danger">RESETAR BANCO</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="limparConsole()" class="success">LIMPAR CONSOLE</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid style="margin: 20px;">
+    <h1>USUÁRIOS</h1>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="inserirUsuarios()" class="danger">INSERIR USUÁRIOS</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="mostrarUsuarios()" class="success">MOSTRAR USUÁRIOS</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-grid style="margin: 20px;">
+    <h1>ITINERÁRIOS</h1>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="apagarItinerarios()" class="danger">APAGAR ITINERÁRIOS</ion-button>
+      </ion-col>
+    </ion-row>
+    <!-- <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="resetarItinerarios()" class="danger">RESETAR ITINERÁRIOS</ion-button>
+      </ion-col>
+    </ion-row> -->
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="inserirPitagorasIda()">INSERIR PITÁGORAS IDA</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="inserirPitagorasVolta()">INSERIR PITÁGORAS IDA</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="inserirUnicaIda()">INSERIR UNICA IDA</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="inserirUnicaVolta()">INSERIR UNICA VOLTA</ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" (click)="mostrarItinerarios()" class="success">MOSTRAR ITINERÁRIOS</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

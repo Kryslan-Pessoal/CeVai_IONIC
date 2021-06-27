@@ -92,7 +92,7 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 		return new Promise((resolve) => {
 			// if((this.email == "kryslan2680@gmail.com" && this.senha == "pokemon123")){
 				if((this.email == "a" && this.senha == "")){
-					this.storage.getAluno().then(
+					this.storage.getAlunos().then(
 						aluno => {
 							Log.d("aluno[0]", aluno[0]);
 							Log.d("aluno[0]", aluno[0].nome);
@@ -108,7 +108,7 @@ export class EntrarComUsuarioESenhaPage implements OnInit {
 				);
 			// }else if(this.email == "gabriel244468@gmail.com" && this.senha == "pokemon123"){
 			}else if(this.email == "a1" && this.senha == ""){
-				this.storage.getAluno().then(
+				this.storage.getAlunos().then(
 					aluno => {
 						Log.d("aluno[0]", aluno[0]);
 						Log.d("aluno[0]", aluno[0].nome);

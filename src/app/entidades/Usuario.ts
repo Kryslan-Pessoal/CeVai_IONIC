@@ -1,11 +1,7 @@
-import { Itinerarios } from "./Itinerario";
-
 export class Usuario{
     idUsuario: number;
     email: string;
     nome: string;
-
-    itinerariosCadastrados: Itinerarios;
 
     //Informações Extras
     nomeCompleto: string;

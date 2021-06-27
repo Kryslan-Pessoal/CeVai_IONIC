@@ -10,33 +10,42 @@
 
 <ion-content>
   <!-- Card -->
-  <ion-card class="card" (click)="rota_cardClick()">
+  <ion-card class="card" (click)="rota_cardClick()" *ngFor="let itinerario of itinerarios">
     <ion-card-content>
       <ion-grid>
         <!-- Título -->
         <ion-row>
-          <ion-col>
-            <h1 class="h1">
-              Manhã - Ida
+          <ion-col size="11">
+            <h1 class="h1" *ngIf="itinerario.seIda">
+              {{itinerario.nomeDoItinerario}} - Ida
             </h1>
-         </ion-col>
+            <h1 class="h1" *ngIf="!itinerario.seIda">
+              {{itinerario.nomeDoItinerario}} - Volta
+            </h1>
+          </ion-col>
+          <ion-col size="1">
+            <ion-icon name="trash"></ion-icon>
+          </ion-col>
         </ion-row>
         <!-- Rota -->
         <ion-row>
-          <ion-col>
-            Rota: <b>Timóteo - Fabriciano - Ipatinga</b>
+          <ion-col *ngIf="itinerario.seIda">
+            Rota: <b>{{itinerario.seuLocal.nomeDoLocal}} - {{itinerario.parada1.nomeDoLocal}} - {{itinerario.faculdadeDestino.nomeDoLocal}}</b>
+          </ion-col>
+          <ion-col *ngIf="!itinerario.seIda">
+            Rota: <b>{{itinerario.faculdadeDestino.nomeDoLocal}} - {{itinerario.parada1.nomeDoLocal}} - {{itinerario.seuLocal.nomeDoLocal}}</b>
           </ion-col>
         </ion-row>
         <!-- Faculdade -->
         <ion-row>
           <ion-col>
-            Rota: <b>Timóteo - Fabriciano - Ipatinga</b>
+            Faculdade: <b>{{itinerario.faculdadeDestino.nomeDoLocal}}</b>
           </ion-col>
         </ion-row>
         <!-- Horário -->
         <ion-row>
           <ion-col>
-            <p>08:00</p>
+            <p>{{itinerario.horaDeSaida}}</p>
           </ion-col>
         </ion-row>
       </ion-grid>

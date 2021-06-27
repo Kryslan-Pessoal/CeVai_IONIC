@@ -18,14 +18,12 @@ export class HomePage implements OnInit {
     public router: Router,
     private navController : NavController,
     public menu: MenuController,
-    private storageService: StorageService,
+    private storage: StorageService,
   ){}
 
   ngOnInit(){
     this.configuraStatusBar();
-
     this.menu.enable(false);
-
   }
   //#endregion Start
 
@@ -53,11 +51,8 @@ export class HomePage implements OnInit {
 
    //#region Utilitários
    configuraStatusBar(){
-    
     StatusBar.setOverlaysWebView({ overlay: true });  //Deixa statusbar Transparente
-
     StatusBar.setBackgroundColor({color:'#CCCCCC'});
-
   }
   //#endregion Utilitários
 

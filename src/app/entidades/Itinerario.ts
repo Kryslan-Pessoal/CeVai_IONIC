@@ -1,28 +1,19 @@
 import { Local } from "./Local";
 
-export class Itinerarios{
-    idItinerario: number;
-    itinerarios: Itinerario[];
-}
-
 export class Itinerario{
-    
     nomeDoItinerario: string;
     /** {@link SentidoDoItinerario} */
-    sentido: string;
-    /** Quantidade de faculdades que este Itinerário terá */
-    qtdFaculdades: number;
+    seIda: boolean;
 
-    localDeSaida: Local;
+    seuLocal: Local;
 
-    faculdadeDestino1: Local;
-    faculdadeDestino2: Local;
+    parada1: Local;
+    parada2: Local;
+    parada3: Local;
+    parada4: Local;
+    parada5: Local;
+
+    faculdadeDestino: Local;
 
     horaDeSaida: string;
-    horaDeChegada: string;
-}
-
-export class SentidoDoItinerario{
-    public static IDA = "ida";
-    public static VOLTA = "volta"; 
 }
