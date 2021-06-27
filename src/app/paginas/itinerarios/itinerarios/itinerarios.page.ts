@@ -3,6 +3,7 @@ import { StatusBar } from '@capacitor/status-bar';
 import { MenuController, NavController } from '@ionic/angular';
 import { Itinerario } from 'src/app/entidades/Itinerario';
 import { StorageService } from 'src/app/storage/storage.service';
+import Log from 'src/app/utilitarios/Log';
 
 @Component({
   selector: 'app-itinerarios',
@@ -30,8 +31,6 @@ export class ItinerariosPage implements OnInit {
 		);
 	}
 	ngOnInit(){}
-
-	
 
 	rota_cardClick(){
 		this.navController.navigateForward(['rota']);
