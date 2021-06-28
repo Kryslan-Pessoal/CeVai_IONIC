@@ -9,7 +9,7 @@ describe('EnderecoPage', () => {
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ EnderecoPage ],
+      declarations: [EnderecoPage],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
@@ -21,4 +21,6 @@ describe('EnderecoPage', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });
+

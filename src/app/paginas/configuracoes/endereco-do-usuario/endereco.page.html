@@ -3,22 +3,72 @@
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
-
     <ion-title>Endereço</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-  <h5>Estado:</h5>
-  <ion-select>
-
-  </ion-select>
-  <h4>Cidade:</h4>
-  <ion-select>
-
-  </ion-select>
-  <h4>Bairro:</h4>
-  <ion-select>
-
-  </ion-select>
+  <ion-list>
+    <ion-item>
+      <ion-label>Estado:</ion-label>
+      <ion-select>
+        <div *ngFor="let nomeEstado of nomeEstados">
+          <ion-select-option value={{nomeEstado}}>
+            {{nomeEstado}}
+          </ion-select-option>
+        </div>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Cidade:</ion-label>
+      <ion-select>
+        <div *ngFor="let nomeCidade of nomeCidades">
+          <ion-select-option value={{nomeCidade}}>
+            {{nomeCidade}}
+          </ion-select-option>
+        </div>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Bairro:</ion-label>
+      <ion-select>
+        <div *ngFor="let nomeBairro of nomeBairros">
+          <ion-select-option value={{nomeBairro}}>
+            {{nomeBairro}}
+          </ion-select-option>
+        </div>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="8" style="margin-left: -9px;">
+        <ion-item>
+          <ion-label position="floating">Rua:</ion-label>
+          <ion-input style="margin-top: 5px;" type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">Número:</ion-label>
+          <ion-input style="margin-top: 5px;" type="text"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-item>
+    <ion-label position="floating">Complemento:</ion-label>
+    <ion-input style="margin-top: 5px; text-align: center;" type="text"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Referência:</ion-label>
+    <ion-input style="margin-top: 10px; text-align: center;" type="text"></ion-input>
+  </ion-item>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button color="danger" expand="block">Cancelar</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button color="success" expand="block">Confirmar</ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>
